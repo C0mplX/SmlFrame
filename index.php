@@ -15,7 +15,5 @@ $app->get( '/about', function() {
     echo 'about';
 } );
 
-
-echo '<pre>';
-print_r( $app );
+# Run the application
 $app->run();

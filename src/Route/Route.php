@@ -33,7 +33,7 @@ class Route {
    */
 
       $uri_get = isset( $_GET['uri'] ) ? "/". $_GET['uri']: '/';
-      var_dump( $uri_get );
+      
       # Check if there are any query params inside the uri
 
       foreach ($this->_get as $key => $value) {
