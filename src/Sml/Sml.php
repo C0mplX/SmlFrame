@@ -23,7 +23,11 @@ class Sml extends Route {
 
       # Load the environmetn
       $this->loadEnv();
+
+      # Run the GET routes
       $this->runGet();
+
+      
 
   }
 
