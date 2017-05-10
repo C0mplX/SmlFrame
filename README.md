@@ -50,7 +50,7 @@ $app::get('/', function() use( $app ){
   $app->response( 200, "it Works" )->send();
 });
 
-# You can also send back json_response by cahning the sendJson method onto the response method.
+# You can also send back json_response by chaining the sendJson method onto the response method.
 $app::get('/', function() use( $app ){
   $app->response( 200, "it Works" )->sendJson();
 });
