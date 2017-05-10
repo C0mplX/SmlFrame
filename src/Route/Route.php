@@ -1,73 +1,75 @@
 <?php
 namespace Sml;
 
-class Route {
+class Routes {
 
-  # Holds all the get Routes
-  private $_get = [];
+  private static $routes = array();
 
-  # Holds all the get Methods
-  private $_getMethods = [];
-
-  # Holds all the post Routes
-  private $_post = [];
-
-  # Holds all the put Routes
-  private $_put = [];
-
-  # Holds all the delete Routes
-  private $_delete = [];
+	private function __construct() {}
+	private function __clone() {}
 
 
-  public function get( $uri, $method = null ) {
-
-    # Check if there are any params passed to the uri
-
-    $params = explode( ':', $uri );
-
-    if( count( $params ) > 1 ) {
-
-      $this->_get[] = "/". trim($params[0], "/");
-
-    } else {
-      $this->_get[] = "/". trim($uri, "/");
-    }
-
-    if( $method != null ) {
-      $this->_getMethods[] = $method;
-    }
-
-  }
-
-  protected function runGet() {
   /**
-   * @Method for running the Get requests
-   */
+  * Register the get routes
+  */
+	public static function get($pattern, $callback) {
 
-      $uri_get = isset( $_GET['uri'] ) ? "/" . $_GET['uri'] : '/';
+    if( $_SERVER['REQUEST_METHOD'] === 'GET' ) {
+      $pattern = '/' . str_replace('/', '\/', $pattern) . '$/';
+      self::$routes[$pattern] = $callback;
+    }
 
-      $striped_uri_get = $this->splitURI( $uri_get );
+	}
 
-      # Check if there are any query params inside the uri
-      foreach ($this->_get as $key => $value) {
+  /**
+  * Register the POST routes
+  */
+  public static function post($pattern, $callback) {
 
-        if( $value == '/'. $striped_uri_get[0] ) {
-          array_shift($striped_uri_get);
-          if( is_string( $this->_getMethods[$key] ) ) {
-            $class = new $this->_getMethods[$key];
-            $class->_getParams = $striped_uri_get;
-          }else {
-            call_user_func_array( $this->_getMethods[$key], $striped_uri_get  );
-          }
+    if( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
+  		$pattern = '/' . str_replace('/', '\/', $pattern) . '$/';
+  		self::$routes[$pattern] = $callback;
+    }
 
-        }
-      }
-  }
+	}
 
-  private function splitURI( $uri ) {
+  /**
+  * Register the put routes
+  */
+  public static function put($pattern, $callback) {
 
-    return explode( '/', $uri );
+    if( $_SERVER['REQUEST_METHOD'] === 'PUT' ) {
+  		$pattern = '/' . str_replace('/', '\/', $pattern) . '$/';
+  		self::$routes[$pattern] = $callback;
+    }
 
-  }
+	}
+
+  /**
+  * Register the delete routes
+  */
+  public static function delete($pattern, $callback) {
+
+    if( $_SERVER['REQUEST_METHOD'] === 'DELETE' ) {
+  		$pattern = '/' . str_replace('/', '\/', $pattern) . '$/';
+  		self::$routes[$pattern] = $callback;
+    }
+	}
+
+
+  /**
+  * Execute the routes
+  */
+	public function execute($url) {
+
+		foreach (self::$routes as $pattern => $callback) {
+			if (preg_match($pattern, $url, $params)) {
+				array_shift($params);
+				return call_user_func_array($callback, array_values($params));
+			}
+		}
+
+	}
+
 
 }
