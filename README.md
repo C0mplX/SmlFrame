@@ -35,6 +35,22 @@ $app::get('/user/(\w+)/(\d+)', function( $string, $int ){
 
 });
 
+
+# POST
+
+$app::post('/user', function() use( $app ) {
+
+  # To get the post request you can do:
+
+  # This recives a json encoded body for you, and returns as obj.
+  # If you want a array you can pass true into the json( true )
+  $app->request()->json();
+
+  # This recives the x-www-form-urlencoded body ( normal POST )
+  $app->request()->body();
+
+});
+
 # Run the application
 $app->run();
 ```

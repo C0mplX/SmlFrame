@@ -53,14 +53,14 @@ class Sml extends Routes {
     return $request;
   }
 
-  public function json() {
+  public function json( $format = false ) {
   /**
   * @method returns a json encoded versjon of JSON application data subbimted by the cliend
   * @uses $this->_request
   * @return obj
   */
     $request = $this->_request;
-    return json_decode( $request );
+    return json_decode( $request, $format );
   }
 
 
@@ -98,7 +98,8 @@ class Sml extends Routes {
     http_response_code( $this->_response["status"] );
 
     # normal data must be string
-    if( is_array($this->_response["data"]) ) new Exception( "Data must be a string" );
+    if( is_array($this->_response["data"]) ) new Exception( "Data must be a string, array given" );
+    if( is_object( $this->_response["data"] ) ) new Exception( "Data must be a string, object given" );
     echo $this->_response["data"];
     die();
   }

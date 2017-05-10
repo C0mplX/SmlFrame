@@ -4,22 +4,22 @@ require_once 'vendor/autoload.php';
 $app = new Sml\Sml();
 
 
-$app::get('/', function(){
+$app::get('/', function() {
   echo 'test';
 });
 
-$app::get('home', function(){
+$app::get('home', function() {
   echo 'home';
 });
 
-$app::get('blog/test/(\w+)', function($id){
+$app::get('blog/test/(\w+)', function($id) {
   print $id;
 });
 
 $app::post( '/home', function() use( $app ) {
   $r = $app->request()->json();
-
-  $app->response( 200, "test" )->send();
+  $app->response( 200, $r )->sendJson();
+  
 } );
 
 $app::put( '/home', function() use( $app ) {
