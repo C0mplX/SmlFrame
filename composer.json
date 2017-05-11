@@ -1,6 +1,7 @@
 {
     "name": "sml/sml-frame",
     "description": "A Tiny framework for handling api's the easy way",
+    "license": "MIT",
     "authors": [
         {
             "name": "Ole Martin",
