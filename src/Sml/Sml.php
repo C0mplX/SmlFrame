@@ -11,6 +11,9 @@ class Sml extends Routes {
   # Holds all the request obj
   private $_request;
 
+  # Holds all the request headers
+  private $_headers;
+
   # Holds all re response obj
   private $_response;
 
@@ -40,6 +43,14 @@ class Sml extends Routes {
 
     $this->_request = file_get_contents('php://input');
     return $this;
+  }
+
+  public function headers() {
+  /**
+  * @method for returning the request headers
+  */
+    $headers = $this->_headers = getallheaders();
+    return $headers;
   }
 
   public function body() {
@@ -90,6 +101,17 @@ class Sml extends Routes {
   * @return _response
   */
     http_response_code( $this->_response["status"] );
+
+    # Add the error key if response is everything but the 200 series
+
+    if( $this->_response["status"] >= 200 && $this->_response["status"] <=299 ) {
+      # Add a false error flag
+      $this->_response["error"] = false;
+    }else {
+      # Add a trueerror flag
+      $this->_response["error"] = true;
+    }
+
     echo json_encode( $this->_response );
     die();
   }

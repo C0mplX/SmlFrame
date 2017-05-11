@@ -19,6 +19,10 @@ class Routes {
       self::$routes[$pattern] = $callback;
     }
 
+    # Init a new instance of the Routes class so we can implement a middleware
+    $inst = new Routes;
+    return $inst;
+
 	}
 
   /**
@@ -30,6 +34,10 @@ class Routes {
   		$pattern = '/' . str_replace('/', '\/', $pattern) . '$/';
   		self::$routes[$pattern] = $callback;
     }
+
+    # Init a new instance of the Routes class so we can implement a middleware
+    $inst = new Routes;
+    return $inst;
 
 	}
 
@@ -43,6 +51,10 @@ class Routes {
   		self::$routes[$pattern] = $callback;
     }
 
+    # Init a new instance of the Routes class so we can implement a middleware
+    $inst = new Routes;
+    return $inst;
+
 	}
 
   /**
@@ -54,6 +66,10 @@ class Routes {
   		$pattern = '/' . str_replace('/', '\/', $pattern) . '$/';
   		self::$routes[$pattern] = $callback;
     }
+
+    # Init a new instance of the Routes class so we can implement a middleware
+    $inst = new Routes;
+    return $inst;
 	}
 
 
