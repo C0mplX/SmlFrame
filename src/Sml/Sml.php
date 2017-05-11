@@ -23,7 +23,7 @@ class Sml extends Routes {
    */
 
     # Load the environment variables
-    $dotenv = new \Dotenv\Dotenv( realpath( __DIR__ . '/../..' ) );
+    $dotenv = new \Dotenv\Dotenv( $_SERVER['DOCUMENT_ROOT'] );
     $dotenv->load();
 
     # Set config variables
