@@ -9,7 +9,6 @@
         }
     ],
     "require": {
-        "vlucas/phpdotenv": "^2.4",
         "firebase/php-jwt": "^3.0"
     },
     "autoload": {

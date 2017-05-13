@@ -9,7 +9,7 @@ namespace Sml;
 
 use \Firebase\JWT\JWT;
 
-class Issuetoken {
+class Issuetoken extends Sml {
 
   # Holds all the token data.
   private $token;
@@ -37,9 +37,9 @@ class Issuetoken {
 
   public function __construct() {
 
-    $this->secret = getenv( "TOKENSECRET" );
-    $this->iss    = getenv('TOKENISS', 'localhost');
-    $this->aud    = getenv('TOKENAUD', 'localhost');
+    $this->secret = $this->_tokensecert;
+    $this->iss    = $this->tokeniss;
+    $this->aud    = $this->tokenaud;
     $this->iat    = time();
     $this->nbf    = time();
     $this->exp    = time() * ( 30 * 24 * 60 * 60 );

@@ -17,17 +17,26 @@ class Sml extends Routes {
   # Holds all re response obj
   private $_response;
 
+  # Holds all the config vars
+  public $_env;
+
+  # Holds the JWT seceret
+  public $_tokensecret;
+
+  # Holds the token ISS
+  public $_tokeniss;
+
+  # Holds the AUD
+  public $_tokenaud;
+
+
   public function __construct() {
   /**
    * Initis the Framework and loads the route class.
    */
 
-    # Load the environment variables
-    $dotenv = new \Dotenv\Dotenv( $_SERVER['DOCUMENT_ROOT'] );
-    $dotenv->load();
-
     # Set config variables
-    $this->env = getenv('ENV', 'dev');
+
 
   }
 
@@ -125,7 +134,6 @@ class Sml extends Routes {
     echo $this->_response["data"];
     die();
   }
-
 
   private function loadEnv() {
   /**

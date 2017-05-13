@@ -17,7 +17,7 @@ class Auth extends Sml {
     # On every route request we check if there is a token present in the
     # Request header.
 
-    $this->secret = getenv( "TOKENSECRET");
+    $this->secret = $this->_tokensecret;
   }
 
   public function decode() {

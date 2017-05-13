@@ -4,6 +4,9 @@ require 'classes/testmid.php';
 
 $app = new Sml\Sml();
 
+# Set the environment
+$app->_env = "dev";
+
 $app::get('/', function() {
 
   # call a middleware

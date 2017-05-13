@@ -1,11 +1,11 @@
 <?php
 namespace Sml;
 
-class Exception {
+class Exception extends Sml{
 
   public function __construct( $exception ) {
 
-    if( getenv('ENV', 'dev') == "dev" ) {
+    if( $this->_env == "dev" ) {
       http_response_code( 500 );
       throw new \Exception( $exception );
     } else  {
